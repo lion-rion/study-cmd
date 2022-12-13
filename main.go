@@ -118,6 +118,8 @@ func Createlog(start time.Time, end time.Time) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	//sleep
+	time.Sleep(5 * time.Second)
 	gitpush(month, day)
 
 }
@@ -148,7 +150,7 @@ func getdiff(start time.Time, end time.Time) string {
 
 func gitpush(month string, day string) {
 	//gitの設定を行う
-	err := exec.Command("git add .").Run()
+	err := exec.Command("git", "add", ".").Run()
 	fmt.Println("git add...")
 	if err != nil {
 		fmt.Println("git add error")
