@@ -76,8 +76,8 @@ func timeTrack() {
 	fmt.Println("-----終了時はEnterを押してください-----")
 	fmt.Scanln() //エンター受付
 	end := time.Now()
-	fmt.Printf("---------勉強終了----------")
-	fmt.Println("%d秒勉強しました", getdiff(start, end))
+	fmt.Println("---------勉強終了----------")
+	fmt.Println("%s勉強しました", getdiff(start, end))
 
 	var answer string
 	fmt.Println("勉強時間を記録しますか？(y/n)")
@@ -158,6 +158,12 @@ func gitpush(month string, day string) {
 	fmt.Println("git commit...")
 	if err != nil {
 		fmt.Println("git add error")
+	}
+
+	err = exec.Command("git push").Run()
+	fmt.Println("git push...")
+	if err != nil {
+		fmt.Println("git push error")
 	}
 
 }
