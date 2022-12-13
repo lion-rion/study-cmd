@@ -118,8 +118,6 @@ func Createlog(start time.Time, end time.Time) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	//sleep
-	time.Sleep(5 * time.Second)
 	gitpush(month, day)
 
 }
@@ -162,7 +160,7 @@ func gitpush(month string, day string) {
 		fmt.Println("git add error")
 	}
 
-	err = exec.Command("git push").Run()
+	err = exec.Command("git", "push").Run()
 	fmt.Println("git push...")
 	if err != nil {
 		fmt.Println("git push error")
