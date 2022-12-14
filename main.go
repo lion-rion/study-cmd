@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -13,15 +14,12 @@ func main() {
 	// var i = flag.Int("i", 0, "数値")
 	// var s = flag.String("s", "", "文字列")
 	// var b = flag.Bool("b", false, "真偽値")
-	// var setup = flag.Bool("setup", false, "真偽値")
-	// flag.Parse()
-	// if *b == true {
-	// 	timeTrack()
-	// }
+	var setup = flag.Bool("setup", false, "真偽値")
+	flag.Parse()
 
-	// if *setup == true {
-	// 	Setup()
-	// }
+	if *setup == true {
+		Setup()
+	}
 
 	//計測開始
 	timeTrack()
@@ -30,25 +28,25 @@ func main() {
 
 func Setup() {
 	//gitの設定を行う
-	err := exec.Command("git init").Run()
+	err := exec.Command("git", "init").Run()
 	fmt.Println("git init...")
 	if err != nil {
-		fmt.Println("git init error")
+		fmt.Println(err)
 	}
 
-	err = exec.Command("git add .").Run()
+	err = exec.Command("git", "add", ".").Run()
 	fmt.Println("git add...")
 	if err != nil {
 		fmt.Println("git add error")
 	}
 
-	err = exec.Command("git commit -m 'initial commit'").Run()
+	err = exec.Command("git", "commit", "-m", "'initial commit'").Run()
 	fmt.Println("git commit...")
 	if err != nil {
 		fmt.Println("git commit error")
 	}
 
-	err = exec.Command("git branch -M main").Run()
+	err = exec.Command("git", "branch", "-M", "main").Run()
 	fmt.Println("git branch -M main...")
 	if err != nil {
 		fmt.Println("git branch -M main error")
@@ -61,7 +59,7 @@ func Setup() {
 	err = exec.Command(str).Run()
 	fmt.Println("git setting...")
 
-	err = exec.Command("git push -u origin main").Run()
+	err = exec.Command("git", "push", "-u", "origin", "main").Run()
 	fmt.Println("git push...")
 
 }
@@ -77,7 +75,7 @@ func timeTrack() {
 	fmt.Scanln() //エンター受付
 	end := time.Now()
 	fmt.Println("---------勉強終了----------")
-	fmt.Println("%s勉強しました", getdiff(start, end))
+	fmt.Printf("%s勉強しました\n", getdiff(start, end))
 
 	var answer string
 	fmt.Println("勉強時間を記録しますか？(y/n)")
